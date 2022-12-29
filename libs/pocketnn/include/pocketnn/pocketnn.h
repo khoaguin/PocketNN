@@ -8,6 +8,7 @@
 #include "pktnn_consts.h"
 #include "pktnn_tools.h"
 #include "pktnn_loader.h"
+#include "pktnn_actv.h"
 
 namespace pocketnn {
     int fc_int_dfa_mnist();

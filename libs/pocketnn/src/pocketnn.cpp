@@ -26,7 +26,7 @@ int pocketnn::fc_int_dfa_mnist() {
     const int dimInput = mnistRows * mnistCols;
     const int dim1 = 100;
     const int dim2 = 50;
-    // pktactv::Actv a = pktactv::Actv::pocket_tanh;
+    pktnn::pktactv::Actv a = pktnn::pktactv::Actv::pocket_tanh;
 
     return 0;
 };

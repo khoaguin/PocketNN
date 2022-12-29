@@ -15,6 +15,7 @@ set(LIBRARY_HEADERS
     ${LIBRARY_HEADERS_DIR}/pktnn_mat.h
     ${LIBRARY_HEADERS_DIR}/pktnn_loader.h
     ${LIBRARY_HEADERS_DIR}/pktnn_mat3d.h
+    ${LIBRARY_HEADERS_DIR}/pktnn_actv.h
 )
 set(LIBRARY_SOURCE_DIR
     src
@@ -25,6 +26,7 @@ set(LIBRARY_SOURCE
     ${LIBRARY_SOURCE_DIR}/pktnn_mat.cpp
     ${LIBRARY_SOURCE_DIR}/pktnn_loader.cpp
     ${LIBRARY_SOURCE_DIR}/pktnn_mat3d.cpp
+    ${LIBRARY_SOURCE_DIR}/pktnn_actv.cpp
 )
 
 project(${PROJECT_NAME})
