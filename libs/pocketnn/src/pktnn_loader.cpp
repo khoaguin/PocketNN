@@ -132,7 +132,7 @@ int pktnn::pktloader::reverseInt(int i) {
 }
 
 pktmat3d** pktnn::pktloader::loadMnistImages(int numImagesToLoad) {
-    std::ifstream file("../data/mnist/train-images.idx3-ubyte", std::ios::binary);
+    std::ifstream file("data/mnist/train-images.idx3-ubyte", std::ios::binary);
     pktmat3d** imageBatches = nullptr;
     if (file.is_open()) {
         // format for the beginning of the file (32 bits each)
@@ -229,10 +229,10 @@ void pktnn::pktloader::loadMnistImages(pktmat& images, int numImagesToLoad, bool
 void pktnn::pktloader::loadMnistLabels(pktmat& labels, int numLabelsToLoad, bool isTrain) {
     std::string fileName;
     if (isTrain) {
-        fileName = "dataset/mnist/train-labels.idx1-ubyte";
+        fileName = "data/mnist/train-labels.idx1-ubyte";
     }
     else {
-        fileName = "dataset/mnist/t10k-labels.idx1-ubyte";
+        fileName = "data/mnist/t10k-labels.idx1-ubyte";
     }
 
     std::ifstream file(fileName, std::ios::binary);
@@ -267,10 +267,10 @@ void pktnn::pktloader::loadMnistLabels(pktmat& labels, int numLabelsToLoad, bool
 void pktnn::pktloader::loadFashionMnistImages(pktmat& images, int numImagesToLoad, bool isTrain) {
     std::string fileName;
     if (isTrain) {
-        fileName = "dataset/fashion_mnist/train-images-idx3-ubyte";
+        fileName = "data/fashion_mnist/train-images-idx3-ubyte";
     }
     else {
-        fileName = "dataset/fashion_mnist/t10k-images-idx3-ubyte";
+        fileName = "data/fashion_mnist/t10k-images-idx3-ubyte";
     }
 
     std::ifstream file(fileName, std::ios::binary);
@@ -318,10 +318,10 @@ void pktnn::pktloader::loadFashionMnistImages(pktmat& images, int numImagesToLoa
 void pktnn::pktloader::loadFashionMnistLabels(pktmat& labels, int numLabelsToLoad, bool isTrain) {
     std::string fileName;
     if (isTrain) {
-        fileName = "dataset/fashion_mnist/train-labels-idx1-ubyte";
+        fileName = "data/fashion_mnist/train-labels-idx1-ubyte";
     }
     else {
-        fileName = "dataset/fashion_mnist/t10k-labels-idx1-ubyte";
+        fileName = "data/fashion_mnist/t10k-labels-idx1-ubyte";
     }
 
     std::ifstream file(fileName, std::ios::binary);

@@ -17,7 +17,7 @@ namespace pktnn {
         };
         static void csvLoader(pktmat& saveToMat, std::string fileName);
         // static bool file_exists(const std::string& name);
-        static void downloadDataset(Dataset dataset);
+        // static void downloadDataset(Dataset dataset);
         static void parseDatasetDiabetes(pktmat& saveToMat, std::string fileName);
         static int reverseInt(int i);
         static pktmat3d** loadMnistImages(int numImagesToLoad);
