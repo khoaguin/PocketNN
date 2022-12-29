@@ -1,6 +1,5 @@
-
-#ifndef __pocketnn__
-#define __pocketnn__
+// #ifndef __pocketnn__
+// #define __pocketnn__
 
 #include <stdio.h>
 #include <iostream>
@@ -9,10 +8,11 @@
 #include "pktnn_tools.h"
 #include "pktnn_loader.h"
 #include "pktnn_actv.h"
+#include "pktnn_fc.h"
 
-namespace pocketnn {
-    int fc_int_dfa_mnist();
-}
+// namespace pocketnn {
+//     int fc_int_dfa_mnist();
+// }
 
 
-#endif
+// #endif

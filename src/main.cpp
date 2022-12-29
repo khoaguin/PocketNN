@@ -1,6 +1,6 @@
-#include <pocketnn/pocketnn.h>
+#include "pktnn_mnist.h"
 
 int main() {
-    pocketnn::fc_int_dfa_mnist();
+    fc_int_dfa_mnist();
     return 0;
 }
