@@ -4,15 +4,15 @@ int fc_int_bp_simple() {
     // constructing the neural net
     const int dim1 = 3;
     const int dim2 = 5;
-    const int numEpochs = 5;
+    const int numEpochs = 3;
 
-    pktnn::pktmat mat1(1, dim1);
+    pktnn::pktmat x(1, dim1);
     pktnn::pktfc fc1(dim1, dim2);
     pktnn::pktfc fc2(dim2, 1);
 
-    std::cout << "--- Weights before initialization --- \n";
+    std::cout << "--- Weights (first layer) before initialization --- \n";
     fc1.printWeight(std::cout);
-    fc2.printWeight(std::cout);
+    // fc2.printWeight(std::cout);
 
     // initialize the weights and biases
     fc1.useDfa(false).initHeWeightBias().setActv(pktnn::pktactv::Actv::pocket_tanh).setNextLayer(fc2);
@@ -20,19 +20,21 @@ int fc_int_bp_simple() {
     
     std::cout << "--- Weights after initialization --- \n";
     fc1.printWeight(std::cout);
-    fc2.printWeight(std::cout);
+    // fc2.printWeight(std::cout);
 
     // dummy data
-    mat1.setElem(0, 0, 10);
-    mat1.setElem(0, 1, 20);
-    mat1.setElem(0, 2, 30);
     std::cout << "--- Data --- \n";
-    mat1.printMat(std::cout);
-
+    x.setElem(0, 0, 10);
+    x.setElem(0, 1, 20);
+    x.setElem(0, 2, 30);
+    std::cout << "x = ";
+    x.printMat(std::cout);
     int y = 551; // random number
+    std::cout << "y = " << y << "\n";
 
+    std::cout << "--- Training --- \n";
     for (int i = 0; i < numEpochs; ++i) {
-        fc1.forward(mat1);
+        fc1.forward(x);
         fc2.forward(fc1);
 
         int y_hat = fc2.mOutput.getElem(0, 0);
@@ -45,6 +47,10 @@ int fc_int_bp_simple() {
 
         fc2.backward(lossDeltaMat, 1e5);
     }
+    
+    std::cout << "--- Weights after training --- \n";
+    fc1.printWeight(std::cout);
+    // fc2.printWeight(std::cout);
 
     return 0;
 };
