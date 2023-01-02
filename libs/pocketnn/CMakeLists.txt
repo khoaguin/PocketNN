@@ -12,12 +12,14 @@ set(LIBRARY_HEADERS_DIR
 set(LIBRARY_HEADERS
     ${LIBRARY_HEADERS_DIR}/pktnn.h
     ${LIBRARY_HEADERS_DIR}/pktnn_consts.h
+    ${LIBRARY_HEADERS_DIR}/pktnn_tools.h
     ${LIBRARY_HEADERS_DIR}/pktnn_mat.h
     ${LIBRARY_HEADERS_DIR}/pktnn_loader.h
     ${LIBRARY_HEADERS_DIR}/pktnn_mat3d.h
     ${LIBRARY_HEADERS_DIR}/pktnn_actv.h
     ${LIBRARY_HEADERS_DIR}/pktnn_fc.h
     ${LIBRARY_HEADERS_DIR}/pktnn_layer.h
+    ${LIBRARY_HEADERS_DIR}/pktnn_loss.h
 )
 set(LIBRARY_SOURCE_DIR
     src
@@ -30,6 +32,7 @@ set(LIBRARY_SOURCE
     ${LIBRARY_SOURCE_DIR}/pktnn_actv.cpp
     ${LIBRARY_SOURCE_DIR}/pktnn_fc.cpp
     ${LIBRARY_SOURCE_DIR}/pktnn_layer.cpp
+    ${LIBRARY_SOURCE_DIR}/pktnn_loss.cpp
 )
 
 project(${PROJECT_NAME})

@@ -8,7 +8,7 @@ set(SOURCE_DIR
 )
 set(PROJECT_SOURCE
     ${SOURCE_DIR}/main.cpp
-    ${SOURCE_DIR}/pktnn_mnist.cpp ${SOURCE_DIR}/pktnn_mnist.h
+    ${SOURCE_DIR}/pktnn_examples.cpp ${SOURCE_DIR}/pktnn_examples.h
 )
 
 set(LIBRARIES_DIR

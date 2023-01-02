@@ -9,10 +9,10 @@
 #include "pktnn_loader.h"
 #include "pktnn_actv.h"
 #include "pktnn_fc.h"
+#include "pktnn_loss.h"
 
 // namespace pocketnn {
 //     int fc_int_dfa_mnist();
 // }
-
 
 // #endif

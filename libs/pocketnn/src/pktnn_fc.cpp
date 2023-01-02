@@ -78,13 +78,13 @@ pktfc& pktnn::pktfc::initHeWeightBias() {
     case pktactv::Actv::pocket_relu8bit:
     case pktactv::Actv::pocket_leakyrelu:
         range = floorSqrt((12 * SHRT_MAX) / (mInDim + mOutDim));
-        std::cout << "He: " << range << "\n";
+        std::cout << "He initialization range: " << range << "\n";
         mWeight.setRandom(false, -range, range);
         mBias.setRandom(false, -range, range);
         break;
     case pktactv::Actv::pocket_tanh:
         range = floorSqrt((12 * SHRT_MAX) / (mInDim + mOutDim));
-        std::cout << "He: " << range << "\n";
+        std::cout << "He initialization range: " << range << "\n";
         mWeight.setRandom(false, -range, range);
         mBias.setRandom(false, -range, range);
         // TODO
