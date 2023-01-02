@@ -8,6 +8,6 @@ Two sample datasets are copied from their original website and are stored in `da
 - `cmake -S . -B build`
 - `cmake --build build`
 - Run the compiled binary, for example `./build/MyPocketNN`
-- The result for example is like the following picture
+- The result for running a simple 2-layer fully connected network on dummy data is like the following picture
 ![](./images/fc_int_dfa_simple.png)
 
