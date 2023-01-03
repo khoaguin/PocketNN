@@ -4,6 +4,16 @@ The Linux version of [PocketNN](https://github.com/jaewoosong/pocketnn).
 Two sample datasets are copied from their original website and are stored in `data/`
 - MNIST dataset: MNIST dataset is from [the MNIST website](http://yann.lecun.com/exdb/mnist/)
 - Fashion-MNIST dataset: Fashion-MNIST dataset is from [its github repository](https://github.com/zalandoresearch/fashion-mnist).
+
+## Repo structure
+```
+├── data              
+├── images      # hold the images in `README.md`
+├── libs        # hold the libraries needed
+├── src         # hold the source code for training and inferencing
+├── tests           # hold the unit tests
+└── weights         # hold the trained weights and biases
+ ```
 ## How to run
 - `cmake -S . -B build`
 - `cmake --build build`
