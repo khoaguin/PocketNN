@@ -793,3 +793,35 @@ pktmat& pktmat::matUpdateLr(pktmat& update, int lr_inverse) {
 
     return *this;
 }
+
+void pktmat::saveToCSV(std::string filename) {
+    std::ofstream outFile(filename);
+
+    // Write the elements of the matrix to the file
+    for (int i = 0; i < mRows; i++) {
+        for (int j = 0; j < mCols; j++) {
+            outFile << getElem(i, j) << ",";
+        }
+        // write a new line after each row
+        outFile << std::endl;
+    }
+}
+
+
+pktmat& pktmat::readFromCSV(std::string filename) {
+    std::ifstream inFile(filename);
+    std::string line;
+    int row = 0;
+    while (std::getline(inFile, line)) {
+        std::stringstream lineStream(line);
+        std::string cell;
+        int col = 0;
+        while (std::getline(lineStream, cell, ',')) {
+            mMat[row][col] = std::stof(cell);
+            col++;
+        }
+        row++;
+    }
+    
+    return *this;
+}

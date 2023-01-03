@@ -5,6 +5,9 @@
 #include <random>
 #include <limits>
 #include <assert.h>
+#include <fstream>
+#include <sstream>
+
 #include "pktnn_tools.h"
 #include "pktnn_consts.h"
 
@@ -100,6 +103,10 @@ namespace pktnn {
         pktmat& sliceOf(pktmat& mat1, int rowStart, int rowEnd, int colStart, int colEnd);
         pktmat& deepCopyOf(const pktmat& mat1);
         pktmat& matUpdateLr(pktmat& update, int lr_inverse);
+
+        // saving to csv file and reading from csv file
+        void saveToCSV(std::string filename);
+        pktmat& readFromCSV(std::string filename);
     };
 
 }

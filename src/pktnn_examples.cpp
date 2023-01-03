@@ -166,7 +166,7 @@ int fc_int_dfa_mnist() {
             miniBatchImages.indexedSlicedSamplesOf(mnistTrainImages, indices, idxStart, idxEnd);
             miniBatchTrainTargets.indexedSlicedSamplesOf(trainTargetMat, indices, idxStart, idxEnd);
 
-            miniBatchImages.printMat(std::cout); // print out the input data
+            // miniBatchImages.printMat(std::cout); // print out the input data
 
             fc1.forward(miniBatchImages);
             sumLoss += pktnn::pktloss::batchL2Loss(lossMat, miniBatchTrainTargets, fcLast.mOutput);
@@ -218,8 +218,35 @@ int fc_int_dfa_mnist() {
     std::cout << "Final learning rate inverse = " << lrInv << "\n";
 
     std::cout << "----- Save weights and biases after training -----\n";
+    fc1.saveWeight("weights/fc1_weight.csv");
+    fc1.saveBias("weights/fc1_bias.csv");
+    fc2.saveWeight("weights/fc2_weight.csv");
+    fc2.saveBias("weights/fc2_bias.csv");
+    fcLast.saveWeight("weights/fcLast_weight.csv");
+    fcLast.saveBias("weights/fcLast_bias.csv");
 
     delete[] indices;
     
     return 0;
 };
+
+int fc_int_dfa_mnist_inference() {
+    std::cout << "----- MNIST Inference -----\n";
+    pktnn::pktmat x(2, 3);
+    x.setElem(0, 0, 10);
+    x.setElem(0, 1, 20);
+    x.setElem(0, 2, 30);
+    x.setElem(1, 0, 10);
+    x.setElem(1, 1, 10);
+    x.setElem(1, 2, 10);
+    std::cout << "x = ";
+    x.printMat(std::cout);
+    x.saveToCSV("weights/x.csv");
+    
+    pktnn::pktmat xx(2, 3);
+    xx.readFromCSV("weights/x.csv");
+    std::cout << "xx = ";
+    xx.printMat(std::cout);
+
+    return 0;
+}

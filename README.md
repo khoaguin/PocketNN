@@ -11,3 +11,5 @@ Two sample datasets are copied from their original website and are stored in `da
 - The result for running a simple 2-layer fully connected network on dummy data is like the following picture
 ![](./images/fc_int_dfa_simple.png)
 
+- The result for running a 3-layer fully connected network on MNIST is in the following picture
+![](./images/fc_int_dfa_mnist.png)

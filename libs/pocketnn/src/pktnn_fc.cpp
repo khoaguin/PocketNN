@@ -60,7 +60,7 @@ pktfc& pktfc::setRandomBias() {
 pktfc& pktnn::pktfc::setRandomDfaWeight(int r, int c) {
     // Using He initialization at this time.
     // Maybe other randomization can work better.
-    std::cout << "Initialized DFA!\n";
+    // std::cout << "Initialized DFA!\n";
     mDfaWeight.resetZero(r, c);
     int range = floorSqrt((12 * SHRT_MAX) / (mInDim + mOutDim));
     mDfaWeight.setRandom(false, -range, range);
@@ -386,4 +386,12 @@ pktfc& pktnn::pktfc::printOutput(std::ostream& outTo) {
     outTo << "Output: \n";
     mOutput.printMat(outTo);
     return *this;
+}
+
+void pktnn::pktfc::saveWeight(std::string fileName) {
+    mWeight.saveToCSV(fileName);
+}
+
+void pktnn::pktfc::saveBias(std::string fileName) {
+    mBias.saveToCSV(fileName);
 }
