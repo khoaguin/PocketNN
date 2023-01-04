@@ -388,10 +388,28 @@ pktfc& pktnn::pktfc::printOutput(std::ostream& outTo) {
     return *this;
 }
 
+pktfc& pktfc::printWeightShape(std::ostream& outTo) {
+    outTo << "Weight's shape: (" << mWeight.rows() << ", " << mWeight.cols() << ")\n";
+    return *this;
+}
+
+pktfc& pktfc::printBiasShape(std::ostream& outTo) {
+    outTo << "Bias's shape: (" << mBias.rows() << ", " << mBias.cols() << ")\n";
+    return *this;
+}
+
 void pktnn::pktfc::saveWeight(std::string fileName) {
     mWeight.saveToCSV(fileName);
 }
 
 void pktnn::pktfc::saveBias(std::string fileName) {
     mBias.saveToCSV(fileName);
+}
+
+void pktnn::pktfc::loadWeight(std::string fileName) {
+    mWeight.readFromCSV(fileName);
+}
+
+void pktnn::pktfc::loadBias(std::string fileName) {
+    mBias.readFromCSV(fileName);
 }

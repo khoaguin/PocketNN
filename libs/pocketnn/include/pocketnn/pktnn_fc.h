@@ -86,10 +86,16 @@ namespace pktnn {
         pktfc& printBias(std::ostream& outTo = std::cout);
         pktfc& printInter(std::ostream& outTo = std::cout);
         pktfc& printOutput(std::ostream& outTo = std::cout);
+        pktfc& printWeightShape(std::ostream& outTo = std::cout);
+        pktfc& printBiasShape(std::ostream& outTo = std::cout);
 
         // save weights and biases
         void saveWeight(std::string fileName);
         void saveBias(std::string fileName);
+
+        // load weights and biases
+        void loadWeight(std::string fileName);
+        void loadBias(std::string fileName);
     };
 }
 #endif

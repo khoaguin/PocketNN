@@ -70,7 +70,6 @@ int fc_int_dfa_mnist() {
     pktnn::pktloader::loadMnistLabels(mnistTrainLabels, numTrainSamples, true); // numTrainSamples x 1
     pktnn::pktloader::loadMnistImages(mnistTestImages, numTestSamples, false); // numTestSamples x (28*28)
     pktnn::pktloader::loadMnistLabels(mnistTestLabels, numTestSamples, false); // numTestSamples x 1
-    // mnistTestImages.printMat(std::cout);
     std::cout << "Loaded train images: " << mnistTrainImages.rows() << ".\nLoaded test images: " << mnistTestImages.rows() << "\n";
 
     // Defining the network
@@ -201,7 +200,9 @@ int fc_int_dfa_mnist() {
         }
     }
     std::cout << "Final training numCorrect = " << numCorrect << "\n";
-
+    fc1.printBias(std::cout);
+    fcLast.printWeight(std::cout);
+    fcLast.printBias(std::cout);
 
     std::cout << "----- Test -----\n";     
     fc1.forward(mnistTestImages);
@@ -231,22 +232,76 @@ int fc_int_dfa_mnist() {
 };
 
 int fc_int_dfa_mnist_inference() {
-    std::cout << "----- MNIST Inference -----\n";
-    pktnn::pktmat x(2, 3);
-    x.setElem(0, 0, 10);
-    x.setElem(0, 1, 20);
-    x.setElem(0, 2, 30);
-    x.setElem(1, 0, 10);
-    x.setElem(1, 1, 10);
-    x.setElem(1, 2, 10);
-    std::cout << "x = ";
-    x.printMat(std::cout);
-    x.saveToCSV("weights/x.csv");
-    
-    pktnn::pktmat xx(2, 3);
-    xx.readFromCSV("weights/x.csv");
-    std::cout << "xx = ";
-    xx.printMat(std::cout);
+    std::cout << "----- Constructing the network -----\n";
+    int numClasses = 10;
+    int mnistRows = 28;
+    int mnistCols = 28;
+
+    const int dimInput = mnistRows * mnistCols;
+    const int dim1 = 100;
+    const int dim2 = 50;
+    pktnn::pktactv::Actv a = pktnn::pktactv::Actv::pocket_tanh;
+
+    pktnn::pktfc fc1(dimInput, dim1);
+    pktnn::pktfc fc2(dim1, dim2);
+    pktnn::pktfc fcLast(dim2, numClasses);
+    fc1.useDfa(true).setActv(a).setNextLayer(fc2);
+    fc2.useDfa(true).setActv(a).setNextLayer(fcLast);
+    fcLast.useDfa(true).setActv(a);
+
+    std::cout << "----- Loading the MNIST test data -----\n";
+    int numTestSamples = 10000;
+    pktnn::pktmat mnistTestLabels;
+    pktnn::pktmat mnistTestImages;
+    pktnn::pktloader::loadMnistImages(mnistTestImages, numTestSamples, false); // numTestSamples x (28*28)
+    pktnn::pktloader::loadMnistLabels(mnistTestLabels, numTestSamples, false); // numTestSamples x 1
+    std::cout << "Loaded test images: " << mnistTestImages.rows() << "\n";
+
+    std::cout << "----- Initial Test Before Loading Weights -----\n";
+    pktnn::pktmat testTargetMat(numTestSamples, numClasses);
+    int numCorrect = 0;
+    fc1.forward(mnistTestImages);
+    for (int r = 0; r < numTestSamples; ++r) {
+        testTargetMat.setElem(r, mnistTestLabels.getElem(r, 0), pktnn::UNSIGNED_4BIT_MAX);
+        if (testTargetMat.getMaxIndexInRow(r) == fcLast.mOutput.getMaxIndexInRow((r))) {
+            ++numCorrect;
+        }
+    }
+    std::cout << "Initial test numCorrect: " << numCorrect << " / 10000" << "\n";
+    std::cout << "Initial test accuracy = " << (numCorrect * 1.0 / numTestSamples) << "\n";
+    // testTargetMat.printMat(std::cout);
+
+    std::cout << "----- Loading weights and biases -----\n";
+    fc1.loadWeight("weights/fc1_weight.csv");
+    fc1.loadBias("weights/fc1_bias.csv");
+    fc2.loadWeight("weights/fc2_weight.csv");
+    fc2.loadBias("weights/fc2_bias.csv");
+    fcLast.loadWeight("weights/fcLast_weight.csv");
+    fcLast.loadBias("weights/fcLast_bias.csv");
+    std::cout << "fc1: \n";
+    // fc1.printBias(std::cout);
+    // fc1.printWeight(std::cout);
+    fc1.printWeightShape(std::cout);
+    fc1.printBiasShape(std::cout);
+    std::cout << "fc2: \n";
+    fc2.printWeightShape(std::cout);
+    fc2.printBiasShape(std::cout);
+    std::cout << "fcLast: \n";
+    fcLast.printWeightShape(std::cout);
+    fcLast.printBiasShape(std::cout);
+    // fcLast.printWeight(std::cout);
+
+    std::cout << "----- Test -----\n";
+    // pktnn::pktmat testTargetMat(numTestSamples, numClasses);
+    fc1.forward(mnistTestImages);
+    int testCorrect = 0;
+    for (int r = 0; r < numTestSamples; ++r) {
+        if (testTargetMat.getMaxIndexInRow(r) == fcLast.mOutput.getMaxIndexInRow((r))) {
+            ++testCorrect;
+        }
+    }
+    std::cout << "Final test numCorrect = " << testCorrect << "\n";
+    std::cout << "Initial test accuracy = " << (testCorrect * 1.0 / numTestSamples) << "\n";
 
     return 0;
 }
