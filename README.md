@@ -1,5 +1,5 @@
 # PocketNN
-The Linux version of [PocketNN](https://github.com/jaewoosong/pocketnn). 
+The Linux version of [PocketNN](https://github.com/jaewoosong/pocketnn): Integer-only Training and Inference of Neural Networks via Direct Feedback Alignment and Pocket Activations. 
 ## Datasets
 Two sample datasets are copied from their original website and are stored in `data/`
 - MNIST dataset: MNIST dataset is from [the MNIST website](http://yann.lecun.com/exdb/mnist/)
