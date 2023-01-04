@@ -1,8 +1,9 @@
 # PocketNN
-The Linux version of [PocketNN](https://github.com/jaewoosong/pocketnn): Integer-only Training and Inference of Neural Networks via Direct Feedback Alignment and Pocket Activations.
+The Linux implementation of [PocketNN: Integer-only Training and Inference of Neural Networks via Direct Feedback Alignment and Pocket Activations.](https://github.com/jaewoosong/pocketnn)
+
 Improvements:
 - The original [code](https://github.com/jaewoosong/pocketnn) was implemented in Windows environment, hence will produce some problems when executing in the linux environment.
-- Add functions to save and load weights of neural network into `.csv` files after training so that we can load them to do inference later. The inference process only on the MNIST dataset is done in the `fc_int_dfa_mnist_inference()` function.
+- Add functions to save and load weights of neural network into `.csv` files after training so we can load them to do inference later. The inference process only on the MNIST dataset is done in the `fc_int_dfa_mnist_inference()` function.
 ## Datasets
 Two datasets used in this project are copied from their original website and are stored in `data/`
 - MNIST dataset: MNIST dataset is from [the MNIST website](http://yann.lecun.com/exdb/mnist/)
@@ -17,6 +18,11 @@ Two datasets used in this project are copied from their original website and are
 ├── tests           # hold the unit tests
 └── weights         # hold the trained weights and biases
  ```
+
+## Requirements
+`cpp==9.4.0`   
+`CMAKE>=3.13` (I used `3.16.3`)
+
 ## How to run
 - `cmake -S . -B build`
 - `cmake --build build`
